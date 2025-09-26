@@ -1,0 +1,610 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Coffice Cat Memecoin</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+	<style>
+		body {
+			margin: 0;
+			font-family: 'Montserrat', Arial, sans-serif;
+			min-height: 100vh;
+			color: #222;
+			position: relative;
+			background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #a1c4fd 100%);
+		}
+		body::before {
+			content: '';
+			position: fixed;
+			top: 0; left: 0; right: 0; bottom: 0;
+			z-index: -2;
+			background: url('cat-memecoin.jpg') center center / cover no-repeat;
+			opacity: 0.6;
+		}
+		body::after {
+			content: '';
+			position: fixed;
+			top: 0; left: 0; right: 0; bottom: 0;
+			z-index: -1;
+			background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #a1c4fd 100%);
+			opacity: 0.5;
+		}
+		nav {
+			width: 100%;
+			background: rgba(255,255,255,0.7);
+			box-shadow: 0 2px 8px rgba(60,60,120,0.08);
+			position: sticky;
+			top: 0;
+			z-index: 10;
+		}
+		.nav-content {
+			max-width: 900px;
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 18px;
+		}
+		.nav-logo {
+			font-weight: 700;
+			font-size: 1.2em;
+			color: #6c63ff;
+			letter-spacing: 1px;
+		}
+		.nav-links {
+			display: flex;
+			gap: 18px;
+		}
+		.nav-links a {
+			color: #3b3b5c;
+			text-decoration: none;
+			font-weight: 500;
+			font-size: 1em;
+			transition: color 0.2s;
+		}
+		.nav-links a:hover {
+			color: #6c63ff;
+		}
+		.container {
+			max-width: 700px;
+			min-height: 100vh;
+			margin: 0 auto;
+			background: transparent;
+			border-radius: 32px;
+			box-shadow: none;
+			padding: 56px 0 40px 0;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		section {
+			margin: 0 0 32px 0;
+			width: 100%;
+			background: linear-gradient(135deg, #fcb69f 0%, #a1c4fd 100%);
+			border-radius: 32px;
+			box-shadow: 0 2px 12px rgba(60,60,120,0.12);
+			padding: 40px 48px 32px 48px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			box-sizing: border-box;
+		}
+		@media (max-width: 900px) {
+			.container {
+				max-width: 98vw;
+				padding: 18px 2vw 18px 2vw;
+			}
+			section {
+				max-width: 98vw;
+				padding: 18px 2vw 18px 2vw;
+				border-radius: 18px;
+			}
+		}
+		.section-title {
+			color: #ff7043;
+			font-size: 2em;
+			margin-bottom: 18px;
+			font-weight: 700;
+			text-align: center;
+			letter-spacing: 1px;
+			text-shadow: 0 2px 8px #fff3e0;
+		}
+		.hero img {
+			width: 240px;
+			height: 340px;
+			object-fit: cover;
+			border-radius: 24px;
+			box-shadow: 0 4px 24px rgba(60,60,120,0.18);
+			border: 3px solid #fff;
+			background: #fff;
+			transition: transform 0.3s;
+		}
+		h1 {
+			margin-top: 24px;
+			font-size: 3em;
+			font-weight: 700;
+			letter-spacing: 2px;
+			color: #6c63ff;
+			text-shadow: 0 2px 8px #fff3e0;
+		}
+		.tagline {
+			font-size: 1.25em;
+			color: #ff7043;
+			margin-bottom: 24px;
+			font-weight: 500;
+		}
+		.tokenomics-details, .how-to-buy, .community {
+			font-size: 1.12em;
+			background: rgba(255,255,255,0.42);
+			border-radius: 12px;
+			padding: 16px 24px;
+			box-shadow: 0 2px 8px rgba(60,60,120,0.08);
+			margin-top: 18px;
+		}
+		.contract {
+			background: rgba(255,255,255,0.42);
+			padding: 16px;
+			border-radius: 10px;
+			margin-top: 18px;
+			word-break: break-all;
+			font-size: 1.12em;
+			box-shadow: 0 2px 8px rgba(60,60,120,0.08);
+		}
+		.roadmap-list {
+			list-style: none;
+			padding: 0;
+			margin-top: 12px;
+		}
+		.roadmap-list li {
+			margin-bottom: 14px;
+			padding-left: 22px;
+			position: relative;
+			font-size: 1.08em;
+		}
+		.roadmap-list li:before {
+			content: '•';
+			position: absolute;
+			left: 0;
+			color: #6c63ff;
+			font-size: 1.3em;
+		}
+		.team {
+			display: flex;
+			align-items: center;
+			gap: 24px;
+			margin-top: 18px;
+		}
+		.team img {
+			width: 64px;
+			height: 64px;
+			border-radius: 50%;
+			object-fit: cover;
+			border: 2px solid #6c63ff;
+		}
+		.team-member {
+			font-weight: 600;
+			color: #3b3b5c;
+			font-size: 1.15em;
+		}
+		.socials {
+			display: flex;
+			gap: 24px;
+			margin-top: 14px;
+		}
+		.socials a {
+			color: #fff;
+			background: #6c63ff;
+			border-radius: 50%;
+			width: 44px;
+			height: 44px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 1.5em;
+			text-decoration: none;
+			transition: background 0.2s;
+		}
+		.socials a:hover {
+			background: #3b3b5c;
+		}
+		.faq {
+			margin-top: 18px;
+		}
+		.faq-item {
+			margin-bottom: 18px;
+		}
+		.faq-q {
+			font-weight: 700;
+			color: #6c63ff;
+			font-size: 1.08em;
+		}
+		.faq-a {
+			margin-left: 10px;
+			font-size: 1.08em;
+		}
+		.news {
+			margin-top: 18px;
+			width: 100%;
+		}
+		.news-item {
+			background: rgba(255,255,255,0.42);
+			border-radius: 10px;
+			padding: 14px 18px;
+			margin-bottom: 14px;
+			box-shadow: 0 2px 8px rgba(60,60,120,0.04);
+			font-size: 1.08em;
+		}
+		@media (max-width: 900px) {
+			.container {
+				max-width: 98vw;
+				padding: 18px 2vw 18px 2vw;
+			}
+			section {
+				max-width: 98vw;
+				padding: 18px 2vw 18px 2vw;
+			}
+			.hero img {
+				width: 98vw;
+				max-width: 240px;
+				height: auto;
+			}
+		}
+		section {
+			margin-bottom: 48px;
+		}
+		.section-title {
+			color: #3b3b5c;
+			font-size: 1.3em;
+			margin-bottom: 8px;
+			font-weight: 700;
+			text-align: left;
+		}
+		.hero {
+			text-align: center;
+		}
+		.hero img {
+			width: 180px;
+			height: 260px;
+			object-fit: cover;
+			border-radius: 18px;
+			box-shadow: 0 4px 24px rgba(60,60,120,0.18);
+			border: 2.5px solid #fff;
+			background: #fff;
+			transition: transform 0.3s;
+		}
+		.hero img:hover {
+			transform: scale(1.04) rotate(-2deg);
+		}
+		h1 {
+			margin-top: 18px;
+			font-size: 2.3em;
+			font-weight: 700;
+			letter-spacing: 1px;
+			color: #3b3b5c;
+			text-shadow: 0 2px 8px #e0e7ff;
+		}
+		.tagline {
+			font-size: 1.15em;
+			color: #6c63ff;
+			margin-bottom: 18px;
+			font-weight: 500;
+		}
+		.tokenomics {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		.tokenomics-details {
+			margin-top: 16px;
+			font-size: 1.08em;
+			background: rgba(255,255,255,0.32);
+			border-radius: 12px;
+			padding: 12px 18px;
+			box-shadow: 0 2px 8px rgba(60,60,120,0.08);
+		}
+		.contract {
+			background: rgba(255,255,255,0.32);
+			padding: 16px;
+			border-radius: 10px;
+			margin-top: 18px;
+			word-break: break-all;
+			font-size: 1.08em;
+			box-shadow: 0 2px 8px rgba(60,60,120,0.08);
+		}
+		.label {
+			color: #6c63ff;
+			font-size: 0.98em;
+			font-weight: 600;
+		}
+		.roadmap-list {
+			list-style: none;
+			padding: 0;
+		}
+		.roadmap-list li {
+			margin-bottom: 10px;
+			padding-left: 18px;
+			position: relative;
+		}
+		.roadmap-list li:before {
+			content: '•';
+			position: absolute;
+			left: 0;
+			color: #6c63ff;
+			font-size: 1.2em;
+		}
+		.team {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+			margin-top: 12px;
+		}
+		.team img {
+			width: 48px;
+			height: 48px;
+			border-radius: 50%;
+			object-fit: cover;
+			border: 2px solid #6c63ff;
+		}
+		.team-member {
+			font-weight: 500;
+			color: #3b3b5c;
+		}
+		.how-to-buy {
+			background: rgba(255,255,255,0.32);
+			border-radius: 12px;
+			padding: 12px 18px;
+			box-shadow: 0 2px 8px rgba(60,60,120,0.08);
+			font-size: 1.05em;
+		}
+		.socials {
+			display: flex;
+			gap: 18px;
+			margin-top: 10px;
+		}
+		.socials a {
+			color: #fff;
+			background: #6c63ff;
+			border-radius: 50%;
+			width: 36px;
+			height: 36px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 1.3em;
+			text-decoration: none;
+			transition: background 0.2s;
+		}
+		.socials a:hover {
+			background: #3b3b5c;
+		}
+		.faq {
+			margin-top: 12px;
+		}
+		.faq-item {
+			margin-bottom: 14px;
+		}
+		.faq-q {
+			font-weight: 600;
+			color: #6c63ff;
+		}
+		.faq-a {
+			margin-left: 8px;
+		}
+		.community {
+			background: rgba(255,255,255,0.32);
+			border-radius: 12px;
+			padding: 12px 18px;
+			box-shadow: 0 2px 8px rgba(60,60,120,0.08);
+			font-size: 1.05em;
+			margin-top: 10px;
+		}
+		.news {
+			margin-top: 12px;
+		}
+		.news-item {
+			background: rgba(255,255,255,0.32);
+			border-radius: 8px;
+			padding: 10px 14px;
+			margin-bottom: 10px;
+			box-shadow: 0 2px 8px rgba(60,60,120,0.04);
+		}
+		@media (max-width: 600px) {
+			.container {
+				max-width: 98vw;
+				padding: 18px 4vw 18px 4vw;
+			}
+			.hero img {
+				width: 98vw;
+				max-width: 180px;
+				height: auto;
+			}
+			.nav-content {
+				flex-direction: column;
+				gap: 8px;
+				padding: 0 8px;
+			}
+		}
+		.fade-in {
+			opacity: 0;
+			transform: translateY(30px);
+			animation: fadeInUp 1s ease-out forwards;
+		}
+		@keyframes fadeInUp {
+			to {
+				opacity: 1;
+				transform: none;
+			}
+		}
+	</style>
+</head>
+<body>
+	<nav>
+		<div class="nav-content">
+			<div class="nav-logo">Coffice Cat</div>
+			<div class="nav-links">
+				<a href="#hero">Home</a>
+				<a href="#about">About</a>
+				<a href="#tokenomics">Tokenomics</a>
+				<a href="#roadmap">Roadmap</a>
+				<a href="#team">Team</a>
+				<a href="#howtobuy">How to Buy</a>
+				<a href="#news">News</a>
+				<a href="#faq">FAQ</a>
+			</div>
+		</div>
+	</nav>
+	<div class="container fade-in">
+		<section id="hero" class="hero">
+			<img src="cat-memecoin.jpg" alt="Coffice Cat" />
+			<h1>Coffice Cat Memecoin</h1>
+			<div class="tagline">The most professional cat in crypto</div>
+		</section>
+		<section id="about">
+			<div class="section-title">About</div>
+			<div>
+				Coffice Cat Memecoin is a fun, community-driven crypto project inspired by the internet's favorite office cat. Our mission is to bring joy, transparency, and a touch of feline professionalism to the world of memecoins.
+			</div>
+		</section>
+		<section id="tokenomics" class="tokenomics">
+			<div class="section-title">Tokenomics</div>
+			<div style="display: flex; align-items: center; justify-content: flex-start; gap: 40px; width: 100%;">
+				<div style="display: flex; align-items: center; height: 100%;">
+					<canvas id="tokenomicsChart" width="180" height="180" style="margin:0;"></canvas>
+				</div>
+				<div style="display: flex; flex-direction: column; gap: 18px;">
+					<div class="tokenomics-details" style="min-width: 220px; text-align: left;">
+						<span class="label">Total Supply:</span> 1,000,000,000 COFFICE<br>
+						<span style="color:#6c63ff;font-weight:600">90% Liquidity Pool (LP)</span> — Locked for trading and stability.<br>
+						<span style="color:#ff7043;font-weight:600">10% Dev Supply</span> — Used for project development and marketing.<br>
+					</div>
+					<div style="background: #fff; border-radius: 18px; box-shadow: 0 2px 8px rgba(60,60,120,0.08); padding: 18px 24px; min-width: 180px;">
+						<div style="font-weight:700; color:#3b3b5c; margin-bottom:10px; font-size:1.1em;">Legend</div>
+						<div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;"><span style="display:inline-block;width:16px;height:16px;border-radius:50%;background:#6c63ff;margin-right:8px;"></span>LP (Liquidity Pool)</div>
+						<div style="display:flex; align-items:center; gap:12px;"><span style="display:inline-block;width:16px;height:16px;border-radius:50%;background:#ff7043;margin-right:8px;"></span>Dev Supply</div>
+					</div>
+				</div>
+			</div>
+			<div class="contract" id="contractAddress">
+				<span class="label">Contract Address:</span><br>
+				0x0000000000000000000000000000000000000000
+			</div>
+		</section>
+		<section id="roadmap">
+			<div class="section-title">Roadmap</div>
+			<ul class="roadmap-list">
+				<li>Launch website & token</li>
+				<li>Build community & socials</li>
+				<li>First meme contest</li>
+				<li>DEX listing</li>
+				<li>Charity donation (cat shelters)</li>
+				<li>More utility & partnerships</li>
+			</ul>
+		</section>
+		<section id="team">
+			<div class="section-title">Team</div>
+			<div class="team">
+				<img src="cat-memecoin.jpg" alt="Coffice Cat Team" />
+				<div class="team-member">Coffice Cat (CEO & Mascot)</div>
+			</div>
+			<div style="margin-top:18px; text-align:center;">
+				<span style="font-weight:600; color:#3b3b5c; font-size:1.08em;">Follow the CEO on X!</span><br>
+				<a href="https://x.com/Coffice_real" target="_blank" style="display:inline-block; margin-top:10px; background:#222; color:#fff; border-radius:50px; padding:8px 22px; font-weight:700; font-size:1.1em; text-decoration:none; box-shadow:0 2px 8px rgba(60,60,120,0.08); transition:background 0.2s;">
+					<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" style="vertical-align:middle; margin-right:8px;"><path d="M17.53 3H21L14.19 10.91L22.14 21H15.68L10.68 14.62L4.98 21H1.01L8.22 12.61L0.61 3H7.18L11.7 8.82L17.53 3ZM16.36 19H18.19L7.75 5H5.81L16.36 19Z" fill="white"/></svg>
+					X
+				</a>
+			</div>
+		</section>
+		<section id="howtobuy">
+			<div class="section-title">How to Buy</div>
+			<div class="how-to-buy">
+				1. Download a Solana wallet (e.g., Phantom, Solflare).<br>
+				2. Fund your wallet with SOL.<br>
+				3. Go to your favorite Solana DEX (e.g., Jupiter, Raydium).<br>
+				4. Paste the Coffice token address.<br>
+				5. Swap SOL for Coffice Cat Memecoin.<br>
+				6. Welcome to the Coffice Cat family!
+			</div>
+		</section>
+		<section id="news">
+			<div class="section-title">Latest News</div>
+			<div class="news">
+				<div class="news-item">🚀 Website launched! Welcome to Coffice Cat Memecoin.</div>
+				<div class="news-item">🐾 Meme contest coming soon. Stay tuned!</div>
+			</div>
+		</section>
+		<section id="faq">
+			<div class="section-title">FAQ</div>
+			<div class="faq">
+				<div class="faq-item">
+					<span class="faq-q">Is this a real project?</span>
+					<span class="faq-a">Yes! Coffice Cat Memecoin is a real, community-driven token.</span>
+				</div>
+				<div class="faq-item">
+					<span class="faq-q">Where can I buy?</span>
+					<span class="faq-a">On decentralized exchanges like Uniswap, using our contract address.</span>
+				</div>
+				<div class="faq-item">
+					<span class="faq-q">Is there a team?</span>
+					<span class="faq-a">Our CEO is a cat, but we have a dedicated community!</span>
+				</div>
+			</div>
+		</section>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+	<script>
+		// Pie chart for tokenomics with animation and datalabels
+		var ctx = document.getElementById('tokenomicsChart').getContext('2d');
+		new Chart(ctx, {
+			type: 'pie',
+			data: {
+				labels: ['LP (Liquidity Pool)', 'Dev Supply'],
+				datasets: [{
+					data: [90, 10],
+					backgroundColor: [
+						'#6c63ff',
+						'#ff7043'
+					],
+					borderWidth: 0
+				}]
+			},
+			options: {
+				plugins: {
+					legend: {
+						display: false
+					},
+					datalabels: {
+						color: '#222',
+						font: {
+							weight: 'bold',
+							size: 16,
+							family: 'Montserrat'
+						},
+						anchor: 'end',
+						align: 'end',
+						offset: 8,
+						borderRadius: 6,
+						backgroundColor: null,
+						padding: 4,
+						formatter: function(value, context) {
+							return context.chart.data.labels[context.dataIndex] + '\n' + value + '%';
+						}
+					}
+				},
+				animation: {
+					animateScale: true,
+					animateRotate: true
+				}
+			},
+			plugins: [ChartDataLabels]
+		});
+		// Fade-in effect for container
+		window.addEventListener('DOMContentLoaded', () => {
+			document.querySelector('.container').classList.add('fade-in');
+		});
+	</script>
+</body>
+</html>
